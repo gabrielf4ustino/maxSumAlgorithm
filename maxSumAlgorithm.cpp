@@ -145,7 +145,40 @@ vector<int> divideAndConquer(vector<int> in, int start, int end)
     }
 }
 
+vector<int> progDin(vector<int> in, int start, int end)
+{
+    vector<int> result;
+    int *f = new int[end];
 
+    f[start] = in[start];
+    for (int i = start + 1; i < end; i++)
+    {
+        if (f[i - 1] > 0)
+        {
+            f[i] = f[i - 1] + in[i];
+        }
+        else
+        {
+            f[i] = in[i];
+        }
+    }
+
+    int s = f[start], endOut = 0, startOut = 0;
+
+    for (int i = start + 1; i < end; i++)
+    {
+        if (f[i] > s)
+        {
+            s = f[i];
+            endOut = i;
+            if (f[i - 1] < 0)
+                startOut = i;
+        }
+    }
+
+    result.insert(result.end(), {startOut + 1, endOut + 1, s});
+    return result;
+}
 
 int main(int argc, char *argv[])
 {
@@ -160,14 +193,14 @@ int main(int argc, char *argv[])
 
     file.open("result.txt");
 
+    file << "Força bruta"
+         << endl
+         << endl;
+
     for (long unsigned int i = 0; i < matriz.size(); i++)
     {
         result.push_back(bruteForce(matriz[i]));
     }
-
-    file << "Força bruta"
-         << endl
-         << endl;
 
     for (long unsigned int i = 0; i < result.size(); i++)
     {
@@ -210,11 +243,29 @@ int main(int argc, char *argv[])
 
     y = Rdtsc();
 
-    file << "Método trivial"
+    result.clear();
+
+    file << "Programação dinâmina"
          << endl
          << endl;
 
-    
+    for (long unsigned int i = 0; i < matriz.size(); i++)
+    {
+        result.push_back(progDin(matriz[i], 0, matriz[i].size()));
+    }
+
+    for (long unsigned int i = 0; i < result.size(); i++)
+    {
+        for (long unsigned int j = 0; j < result[i].size(); j++)
+            file << result[i][j] << " ";
+        file << endl;
+    }
+
+    file << endl
+         << "Tempo de execução: "
+         << Rdtsc() - y
+         << endl
+         << endl;
 
     file.close();
 
