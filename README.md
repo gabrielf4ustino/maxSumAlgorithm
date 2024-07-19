@@ -1,11 +1,11 @@
-# Sobre
-Projeto com objetivo em mostrar a diferença no tempo de execução entre força bruta, divisão e conquista e programação dinnâmica no problema de soma máxima.
+# About
+Project aiming to show the difference in execution time between brute force, divide and conquer and dynamic programming in the maximum sum problem.
 
-# Pré-requisitos
-Compilador c++
+# Prerequisites
+c++ compiler
 
-# Como compilar
-- g++ -o <NOME> maxSumAlgorithm.cpp -Wall -pedantic
+# How to compile
+- g++ -o <NAME> maxSumAlgorithm.cpp -Wall -pedantic
 
-# Como executar
-./<NOME_DO_EXECUTAVEL> <NOME_ARQUIVO_DE_ENTRADA>.txt
+# How to run
+./<EXECUTABLE_NAME> <INPUT_FILE_NAME>.txt
